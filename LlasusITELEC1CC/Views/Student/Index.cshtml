@@ -2,27 +2,38 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <h1>Student Details</h1>
-    <table>
-        <tr>
-            <td>Name: </td>
-            <td>@ViewBag.student.StudentName</td>
-        </tr>
-
-        <tr>
-            <td>DateEnrolled: </td>
-            <td>@ViewBag.student.DateEnrolled</td>
-        </tr>
-
-        <tr>
-            <td>Course: </td>
-            <td>@ViewBag.student.StudentCourse</td>
-        </tr>
-
-        <tr>
-            <td>Email: </td>
-            <td>@ViewBag.student.Email</td>
-        </tr>
-
-    </table>
 }
+@model IEnumerable<LlasusITELEC1CC.Models.Student>
+<h1>Student List</h1>
+
+<table class="table table-dark">
+
+    <tr>
+        <th colspan="8">Student</th>
+    </tr>
+
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Course</td>
+        <td>Admission</td>
+        <td>Email</td>
+        <td>GPA</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        @foreach (var Student in Model)
+        {
+        <tr>
+            <td>@Student.Id </td>
+            <td>@Student.Name </td>
+            <td>@Student.Course </td>
+            <td>@Student.Admission </td>
+            <td>@Student.Email </td>
+            <td>@Student.GPA </td>
+            <td><a asp-action="ShowDetail" asp-route-id="@Student.Id">Show Details</a></td>
+            <td><a asp-action="UpdateStudent" asp-route-id="@Student.Id">Update</a></td>
+        </tr>
+        }
+</table>

@@ -8,23 +8,50 @@ namespace LlasusITELEC1CC.Controllers
         {
             new Instructor()
             {
-                InstructorName = "Gabriel Montano", DateHired = DateTime.Now, 
-                InstructorEmail = "gabrielmontano@gmail.com", Rank = Rank.Instructor
+               Id = 1, FirstName = "Gabriel", LastName = "Montano", IsTenured = "Yes",
+                DateHired = DateTime.Now, Rank = Rank.Instructor
             },
             new Instructor()
             {
-                InstructorName = "Leo Lintag", DateHired= DateTime.Now,
-                InstructorEmail = "leolintag@gmail.com", Rank= Rank.AssistProf
+               Id = 2, FirstName = "Leo", LastName = "Lintag", IsTenured = "Yes", 
+                DateHired= DateTime.Now, Rank= Rank.AssistProf
             },
             new Instructor()
             {
-                InstructorName = "Zxy Montano", DateHired = DateTime.Now,
-                InstructorEmail = "Zxymontano@gmail.com", Rank = Rank.Prof
+               Id = 3, FirstName = "Zxy", LastName = "Uvw", IsTenured = "No", 
+                DateHired = DateTime.Now, Rank = Rank.AssociateProf
+            },
+            new Instructor()
+            {
+               Id = 4, FirstName = "Qwer", LastName = "Tyui", IsTenured = "No",
+                DateHired = DateTime.Now, Rank = Rank.Prof
             }
         };
         public IActionResult Index()
         {
             return View(InstructorList);
+        }
+
+        public IActionResult ShowDetail(int id)
+        {
+            
+            Instructor? instructor = InstructorList.FirstOrDefault(inst => inst.Id == id);
+
+            if (instructor != null)
+                return View(instructor);
+
+            return NotFound();
+        }
+        [HttpGet]
+        public IActionResult UpdateInstructor()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult UpdateInstructor(Instructor newInstructor)
+        {
+            InstructorList.Add(newInstructor);
+            return View("Index", InstructorList);
         }
     }
 }
